@@ -136,7 +136,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                               return;
                             }
                             readViewModel.signIn(context, () {
-                              navigatePush(context, ChatHomeScreen());
+                              navigatePush(context, const ChatHomeScreen());
                             });
                           },
                           child: gradientButton(context, 'Login')),

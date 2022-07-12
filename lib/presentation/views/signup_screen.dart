@@ -139,10 +139,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             }),
                             GestureDetector(
                                 onTap: () {
-                                  if (!_formStateKey.currentState!.validate()) {
-                                    // Invalid!
-                                    return;
-                                  }
                                   readViewModel.signUP(context, () {
                                     navigatePush(context, LogInScreen());
                                   });

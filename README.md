@@ -4,7 +4,14 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This is a flutter messaging app built with firebase messaging,push notifications, cloud firestore and authentication. The app is incomplete, still deploying new implementations.
+
+<p align="center">
+  <img src="asset\images\home-removebg-preview.png" width="350" title="home screen">
+  <img src="asset\images\input-removebg-preview.png" width="350" alt="chat screen">                                                    
+  <img src="asset\images\login-removebg-preview.png" width="350" alt="login screen">
+  <img src="asset\images\signup-removebg-preview.png" width="350" alt="signup screen">
+</p>
 
 A few resources to get you started if this is your first Flutter project:
 
