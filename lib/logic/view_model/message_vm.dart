@@ -8,6 +8,10 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../../data/model/message_model.dart';
 
 class MessageVM extends ChangeNotifier {
+  String? message;
+  TextEditingController messageController = TextEditingController();
+
+
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   Future<Set<String>> token =
       FirebaseMessaging.instance.getToken().then((value) => {});

@@ -1,4 +1,5 @@
 import 'package:chat_app/logic/service/local_notification_servive.dart';
+import 'package:chat_app/presentation/views/chat_input_screen.dart';
 import 'package:chat_app/presentation/views/login_screen.dart';
 import 'package:chat_app/presentation/widget/messaging_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,9 +26,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LogInScreen(),
+      home: LogInScreen()
     );
   }
 }

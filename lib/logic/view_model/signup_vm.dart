@@ -33,5 +33,28 @@ class SignupVM extends ChangeNotifier {
     notifyListeners();
   }
 }
-
+// vysor
+// vysor app
+// Ben Chukwuma5:50 PM
+// FirebaseFirestore.instance
+//     .collection('users')
+// .doc(user.uid)
+// .snapshots()
+//     .listen((userData) {
+//
+// setState(() {
+// myId = userData.data()['uid'];
+// myUsername = userData.data()['name'];
+// myUrlAvatar = userData.data()['avatarurl'];
+//
+// FirebaseFirestore.instance
+//     .collection('User')
+//     .doc(user.uid)
+//     .snapshots()
+//     .listen((userData) {
+//
+// setState(() {
+// myId = userData.data()['uid'];
+// myUsername = userData.data()['name'];
+// myUrlAvatar = userData.data()['avatarurl'];
 

@@ -16,13 +16,16 @@ Widget buildTextForm(BuildContext context,
     width: context.width() * 31,
     padding: const EdgeInsets.only(left: 10, top: 10, bottom: 5),
     height: context.height() * .075,
-    margin: const EdgeInsets.only(left: 33, right: 33, top: 24,),
+    margin: const EdgeInsets.only(
+      left: 33,
+      right: 33,
+      top: 24,
+    ),
     decoration: BoxDecoration(
       color: const Color.fromRGBO(246, 247, 251, 1),
       borderRadius: BorderRadius.circular(10),
     ),
     child: TextFormField(
-
       validator: validator,
       obscureText: obscure,
       controller: controller,
@@ -114,18 +117,24 @@ Widget chatTextDisplay() {
   );
 }
 
-typeBox(FocusNode focusNode, BuildContext context) {
+typeBox(
+    {required BuildContext context,
+    void Function(String value)? onChanged,
+    void Function()? onTap,
+    required Color? color,
+    required TextEditingController controller}) {
   return Container(
-    height: context.height() * .08,
+    //height: context.height() * .08,
     width: double.infinity,
     alignment: Alignment.center,
     color: Color(0xffFAFAFA),
     child: Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
             alignment: Alignment.center,
-            margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+            margin: const EdgeInsets.fromLTRB(10, 10, 0, 0),
             height: 38,
             width: 38,
             decoration: BoxDecoration(
@@ -143,26 +152,29 @@ typeBox(FocusNode focusNode, BuildContext context) {
           indent: 10,
         ),
         Expanded(
-          child: TextFormField(
-              focusNode: focusNode,
+          child: TextField(
+              controller: controller,
+              onChanged: onChanged,
+              maxLines: 10,
+              minLines: 1,
               decoration: const InputDecoration(
                   hintText: 'Type something..',
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.fromLTRB(10, 15, 10, 5))),
         ),
-        Container(
-            alignment: Alignment.center,
-            margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-            height: 38,
-            width: 38,
-            decoration: BoxDecoration(
-                color: const Color(0xffF5F5F5),
-                borderRadius: BorderRadius.circular(10)),
-            child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
+        GestureDetector(
+            onTap: onTap,
+            child: Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.fromLTRB(0, 10, 10, 0),
+                height: 38,
+                width: 38,
+                decoration: BoxDecoration(
+                    color: Color(0xffF5F5F5),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Icon(
                   Icons.arrow_upward,
-                  color: Color(0xffFFA925),
+                  color: color,
                 ))),
       ],
     ),
