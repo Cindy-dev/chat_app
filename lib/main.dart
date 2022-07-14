@@ -1,7 +1,7 @@
 import 'package:chat_app/logic/service/local_notification_servive.dart';
 import 'package:chat_app/presentation/views/chat_input_screen.dart';
 import 'package:chat_app/presentation/views/login_screen.dart';
-import 'package:chat_app/presentation/widget/messaging_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +28,26 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ChatInputScreen((value) {
-        print(value);
-      }),
+      home: SplashScreen(),
+    );
+  }
+}
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ChatInputScreen((value){});
+          } else {
+            return LogInScreen();
+          }
+        },
+      ),
     );
   }
 }

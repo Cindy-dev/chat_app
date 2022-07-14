@@ -49,69 +49,76 @@ Widget buildTextForm(BuildContext context,
   );
 }
 
-Widget chatTextDisplay() {
+Widget chatTextDisplay(String? user) {
   return Row(
-    mainAxisSize: MainAxisSize.max,
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
-      const CircleAvatar(
-        backgroundColor: Color(0xffFF7841),
-      ),
-      Column(
-        children: [
-          const Text(
-            'cindy dev',
-            style: TextStyle(
-                color: Color(0xff262626),
-                fontSize: 14,
-                fontWeight: FontWeight.w600),
+      Expanded(
+        flex: 2,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 50, right: 50),
+          child: Column(
+            children: [
+              Text(
+                user!.toUpperCase(),
+                overflow: TextOverflow.visible,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Color(0xff262626),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600),
+              ),
+              Text(
+                'online now',
+                style: TextStyle(
+                    foreground: AppColors.paintText,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w500),
+              ),
+            ],
           ),
-          Text(
-            'online now',
-            style: TextStyle(
-                foreground: AppColors.paintText,
-                fontSize: 10,
-                fontWeight: FontWeight.w500),
-          ),
-        ],
+        ),
       ),
-      Row(
-        children: [
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              alignment: Alignment.center,
-              margin: const EdgeInsets.fromLTRB(10, 10, 0, 0),
-              height: 38,
-              width: 38,
-              decoration: BoxDecoration(
-                  color: const Color(0xffFAFAFA),
-                  borderRadius: BorderRadius.circular(6)),
-              child: const Icon(
-                Icons.video_call,
-                size: 16,
-                color: Color(0xffA3A3A3),
+      Expanded(
+        child: Row(
+          children: [
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                height: 38,
+                width: 38,
+                decoration: BoxDecoration(
+                    color: const Color(0xffFAFAFA),
+                    borderRadius: BorderRadius.circular(6)),
+                child: const Icon(
+                  Icons.video_call,
+                  size: 16,
+                  color: Color(0xffA3A3A3),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              alignment: Alignment.center,
-              margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-              height: 38,
-              width: 38,
-              decoration: BoxDecoration(
-                  color: const Color(0xffFAFAFA),
-                  borderRadius: BorderRadius.circular(6)),
-              child: const Icon(
-                Icons.phone,
-                size: 16,
-                color: Color(0xffA3A3A3),
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                height: 38,
+                width: 38,
+                decoration: BoxDecoration(
+                    color: const Color(0xffFAFAFA),
+                    borderRadius: BorderRadius.circular(6)),
+                child: const Icon(
+                  Icons.phone,
+                  size: 16,
+                  color: Color(0xffA3A3A3),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       )
     ],
   );
@@ -121,7 +128,6 @@ typeBox(
     {required BuildContext context,
     void Function(String value)? onChanged,
     void Function()? onTap,
-    required Color? color,
     required TextEditingController controller}) {
   return Container(
     //height: context.height() * .08,
@@ -174,7 +180,7 @@ typeBox(
                     borderRadius: BorderRadius.circular(10)),
                 child: Icon(
                   Icons.arrow_upward,
-                  color: color,
+                  color: Color(0xffFFA925),
                 ))),
       ],
     ),

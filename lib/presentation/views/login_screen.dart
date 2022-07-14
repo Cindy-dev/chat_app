@@ -3,6 +3,7 @@ import 'package:chat_app/presentation/helpers/color.dart';
 import 'package:chat_app/presentation/helpers/device_size.dart';
 import 'package:chat_app/presentation/helpers/navigators.dart';
 import 'package:chat_app/presentation/views/chat_home_screen.dart';
+import 'package:chat_app/presentation/views/chat_input_screen.dart';
 import 'package:chat_app/presentation/views/signup_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -136,7 +137,11 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                               return;
                             }
                             readViewModel.signIn(context, () {
-                              navigatePush(context, const ChatHomeScreen());
+                              Future.delayed(Duration.zero, () {
+                                navigatePush(context, ChatInputScreen((value) {
+                                  print(value);
+                                }));
+                              });
                             });
                           },
                           child: gradientButton(context, 'Login')),

@@ -10,7 +10,7 @@ import '../../data/model/message_model.dart';
 class MessageVM extends ChangeNotifier {
   String? message;
   TextEditingController messageController = TextEditingController();
-
+  final User currentUser = FirebaseAuth.instance.currentUser!;
 
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   Future<Set<String>> token =
@@ -24,8 +24,22 @@ class MessageVM extends ChangeNotifier {
         .snapshots()
         .listen((userData) {
       var myId = userData.data()!['uid'];
-      var myUsername = userData.data()!['name'];
+      var myUsername = userData.data()!['fullName'];
     });
+  }
+
+  //saves a message typed
+  void addMessage() async{
+    final user = FirebaseAuth.instance.currentUser;
+    if(user!= null){
+      await
+      FirebaseFirestore.instance.collection('messages').add({
+        'author': user.displayName ?? 'Anonymous',
+        'author_id': user.uid,
+        'time': Timestamp.now().millisecondsSinceEpoch,
+        'chat': messageController.text
+      });
+    }
   }
 
   messageInitializer(BuildContext context) {

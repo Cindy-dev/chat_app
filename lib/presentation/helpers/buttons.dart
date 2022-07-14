@@ -2,11 +2,15 @@ import 'package:chat_app/presentation/helpers/device_size.dart';
 import 'package:chat_app/presentation/helpers/navigators.dart';
 import 'package:chat_app/presentation/views/chat_home_screen.dart';
 import 'package:chat_app/presentation/views/login_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'color.dart';
 
-Widget gradientButton(BuildContext context, String text,) {
+Widget gradientButton(
+  BuildContext context,
+  String text,
+) {
   return Container(
     alignment: Alignment.center,
     height: context.height() * .075,
@@ -46,9 +50,9 @@ Widget textButton(String text1, String text2, void Function()? navigate) {
   );
 }
 
-Widget appBarNavigate(BuildContext context, IconData iconData) {
+Widget appBarNavigate(BuildContext context, IconData iconData, VoidCallback exitApp) {
   return GestureDetector(
-    onTap: () => navigatePush(context, const ChatHomeScreen()),
+    onTap: exitApp,
     child: Container(
       alignment: Alignment.center,
       margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -64,4 +68,33 @@ Widget appBarNavigate(BuildContext context, IconData iconData) {
       ),
     ),
   );
+}
+
+deleteMessage(BuildContext context, String docId) {
+  showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+            title: Text('Delete Message'),
+            actions: [
+              InkWell(
+                onTap: navigatePop(context),
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.black, fontSize: 15),
+                ),
+              ),
+              InkWell(
+                onTap: () async {
+                  await FirebaseFirestore.instance
+                      .collection('messages')
+                      .doc(docId)
+                      .delete();
+                },
+                child: const Text(
+                  'Delete',
+                  style: TextStyle(color: Colors.red, fontSize: 15),
+                ),
+              )
+            ],
+          ));
 }
